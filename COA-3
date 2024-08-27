@@ -1,0 +1,83 @@
+1.) Write a program in assembly language to perform subtraction of 8-bit data.
+org 100h   
+num1 db 24h 
+num2 db 29h 
+start:
+    mov al, num1
+    sub al, num2
+    mov bl, al
+    mov ah, al
+    and ah, 0F0h 
+    shr ah, 4 
+    add ah, 30h
+    cmp ah, 39h
+    jle print_first_digit
+    add ah, 7
+print_first_digit:
+    mov dl, ah 
+    mov ah, 02h
+    int 21h
+    mov ah, bl
+    and ah, 0Fh
+    add ah, 30h
+    cmp ah, 39h
+    jle print_second_digit
+    add ah, 7 
+print_second_digit:
+    mov dl, ah 
+    mov ah, 02h 
+    int 21h
+    mov ah, 4Ch
+    int 21h
+
+2)Write an assembly language program to perform subtraction of 16-bit data
+ORG 100h
+NUM1 DW 1234h  
+NUM2 DW 5678h  
+START:
+    MOV AX, NUM1
+    SUB AX, NUM2
+    MOV BX, AX 
+    MOV AH, BH
+    SHR AH, 4 
+    ADD AH, 30h
+    CMP AH, 39h
+ JLE PRINT_HIGH_NIBBLE
+    ADD AH, 7  
+PRINT_HIGH_NIBBLE:
+    MOV DL, AH 
+    MOV AH, 02h
+    INT 21h
+    MOV AH, BH
+    AND AH, 0Fh
+    ADD AH, 30h
+    CMP AH, 39h
+    JLE PRINT_LOW_NIBBLE
+    ADD AH, 7  
+PRINT_LOW_NIBBLE:
+    MOV DL, AH 
+    MOV AH, 02h
+    INT 21h
+    MOV AH, BL 
+    SHR AH, 4  
+    ADD AH, 30h
+    CMP AH, 39h
+    JLE PRINT_HIGH_NIBBLE2
+    ADD AH, 7  
+PRINT_HIGH_NIBBLE2:
+    MOV DL, AH 
+    MOV AH, 02h
+    INT 21h
+    MOV AH, BL 
+    AND AH, 0Fh
+    ADD AH, 30h
+    CMP AH, 39h
+    JLE PRINT_LOW_NIBBLE2
+    ADD AH, 7  
+PRINT_LOW_NIBBLE2:
+    MOV DL, AH 
+    MOV AH, 02h
+    INT 21h
+    MOV AH, 4Ch
+    INT 21h
+
